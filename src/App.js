@@ -3,23 +3,23 @@ import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import './App.css';
 import Loading from './Loading.gif'
-const Api_Key = "226ae47f7748dc58a10211435076a3c3"
+
 
 class App extends Component {
 
   state = {
     data: undefined,
-    labels: ['Temp', 'Humidity', 'pressure', 'Temp_Max', 'Temp_Min'],
+    labels: undefined,
     loaded: true
   };
 
   earthquake = async (e) => {
     e.preventDefault();
-    const city = e.target.elements.city.value;
-    const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${Api_Key}`);
+    const day = e.target.elements.day.value;
+    const response = await fetch(`API`);
     const data = await response.json();
     this.setState({
-      data: [data.main.temp, data.main.humidity, data.main.pressure, data.main.temp_max, data.main.temp_min],
+      data: [],
       loaded: true
     })
     console.log(data);
@@ -65,8 +65,8 @@ class App extends Component {
         <div className="container">
           <form onSubmit={this.earthquake}>
             <div className="form-group">
-              <label foror="city">Enter City Name:</label>
-              <input type="text" class="form-control" name="city" placeholder="Enter City Name" />
+              <label foror="city">Enter Day Name:</label>
+              <input type="text" class="form-control" name="day" placeholder="Enter Day" />
             </div>
             <div className="form-group">
               <label foror="Time  ">Time</label>
